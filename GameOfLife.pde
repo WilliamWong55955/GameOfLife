@@ -3,12 +3,13 @@ import de.bezier.guido.*;
 private Life[][] buttons; //2d array of Life buttons each representing one cell
 private boolean[][] buffer; //2d array of booleans to store state of buttons array
 private boolean running = true; //used to start and stop program
+public int speed = 6;
 public final static int NUM_ROWS = 40;
 public final static int NUM_COLS = 40;
 
 public void setup () {
   size(600, 600);
-  frameRate(6);
+  frameRate(speed);
   // make the manager
   Interactive.make( this );
 
@@ -39,8 +40,12 @@ public void draw () {
 
 public void keyPressed() {
   //your code here
+  if(key=='t')
   running= !running;
-  
+  if(key=='f')
+  faster();
+  if(key=='s')
+  slower();
 }
 
 public void copyFromBufferToButtons() {
@@ -117,4 +122,13 @@ public class Life {
   public void setLife(boolean living) {
     alive = living;
   }
+}
+public void faster(){
+ speed++;
+ frameRate(speed); 
+}
+public void slower(){
+ if(speed>1)
+ speed--;
+ frameRate(speed);
 }
